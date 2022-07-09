@@ -16,12 +16,15 @@ public class App {
         var carlos = new Directivo("Carlos Joven", 28);
         var empleados = new Empleado[]{ cesar, andres, carlos };
 
-        var laura = new Cliente("Laura Pacheco", 23, "3105551234");
+        var laura = new Cliente("Laura Pacheco", 23, "6015551234 ext 301");
         var rafael = new Cliente("Rafael Londoño", 33, "3105554321");
 
         var empresa = new Empresa("Grupo 03", empleados);
-        empresa.clientes[0] = laura;
-        empresa.clientes[1] = rafael;
+        empresa.agregarCliente(laura);
+        empresa.agregarCliente(rafael);
+
+        cesar.setSueldoBruto(3_001_000d);
+        laura.setTelefono(null);
 
         // Imprimir datos
         empresa.mostrar();

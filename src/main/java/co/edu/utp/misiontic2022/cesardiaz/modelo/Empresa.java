@@ -1,15 +1,27 @@
 package co.edu.utp.misiontic2022.cesardiaz.modelo;
 
 public class Empresa {
-    public String nombre;
+    private String nombre;
 
-    public Empleado[] empleados;
-    public Cliente[] clientes;
+    private Empleado[] empleados;
+    private Cliente[] clientes;
+    private Integer numClientes;
 
     public Empresa(String nombre, Empleado[] empleados) {
         this.nombre = nombre;
         this.empleados = empleados;
+
         this.clientes = new Cliente[100];
+        this.numClientes = 0;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void agregarCliente(Cliente cliente){
+        clientes[numClientes] = cliente;
+        numClientes++;
     }
 
     public void mostrar() {

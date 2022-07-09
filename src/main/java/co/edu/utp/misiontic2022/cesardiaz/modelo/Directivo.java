@@ -3,9 +3,9 @@ package co.edu.utp.misiontic2022.cesardiaz.modelo;
 public class Directivo extends Empleado {
     public static final String CATEGORIA_DEFAULT = "Sin Categoria";
 
-    public String categoria;
+    private String categoria;
 
-    public Empleado[] subordinados;
+    private Empleado[] subordinados;
 
     public Directivo(String nombre, Integer edad, Double sueldoBruto, String categoria) {
         super(nombre, edad, sueldoBruto);
@@ -25,9 +25,17 @@ public class Directivo extends Empleado {
         this(nombre, edad, CATEGORIA_DEFAULT);
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public Empleado[] getSubordinados() {
+        return subordinados;
+    }
+
     @Override
     public void mostrar() {
         System.out.printf("El directivo %s tiene %d años y su sueldo es de $ %,.2f y su categoria es %s %n",
-                nombre, edad, sueldoBruto, categoria);
+                getNombre(), getEdad(), getSueldoBruto(), categoria);
     }
 }
