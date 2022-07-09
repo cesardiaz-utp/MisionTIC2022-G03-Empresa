@@ -1,6 +1,8 @@
 package co.edu.utp.misiontic2022.cesardiaz.modelo;
 
-public class Empleado extends Persona {
+import co.edu.utp.misiontic2022.cesardiaz.excepciones.SueldoErroneoException;
+
+public class Empleado extends Persona implements Comparable<Empleado> {
     public static final Double SALARIO_MINIMO = 1_000_000d;
 
     private Double sueldoBruto;
@@ -20,7 +22,7 @@ public class Empleado extends Persona {
 
     public void setSueldoBruto(Double sueldoBruto) {
         if (sueldoBruto < this.sueldoBruto) {
-            return;
+            throw new SueldoErroneoException("El sueldo no puede ser menor al anterior");
         }
         this.sueldoBruto = sueldoBruto;
     }
@@ -33,6 +35,17 @@ public class Empleado extends Persona {
 
     public void calcularSalarioNeto() {
         // TODO: Calcular salario neto
+    }
+
+    @Override
+    public int compareTo(Empleado o) {
+        var comparacion = sueldoBruto.compareTo(o.getSueldoBruto());
+
+        if (comparacion == 0) {
+            comparacion = getNombre().compareTo(o.getNombre());
+        }
+
+        return comparacion;
     }
 
 }

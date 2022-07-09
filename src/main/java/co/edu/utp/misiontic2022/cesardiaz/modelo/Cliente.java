@@ -1,5 +1,7 @@
 package co.edu.utp.misiontic2022.cesardiaz.modelo;
 
+import co.edu.utp.misiontic2022.cesardiaz.excepciones.TelefonoErroneoException;
+
 public class Cliente extends Persona {
 
     private String telefono;
@@ -13,9 +15,9 @@ public class Cliente extends Persona {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(String telefono) throws TelefonoErroneoException {
         if (telefono == null || telefono.isEmpty()) {
-            return;
+            throw new TelefonoErroneoException();
         }
         this.telefono = telefono;
     }

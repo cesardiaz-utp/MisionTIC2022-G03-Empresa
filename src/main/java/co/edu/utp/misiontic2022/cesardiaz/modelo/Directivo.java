@@ -1,16 +1,19 @@
 package co.edu.utp.misiontic2022.cesardiaz.modelo;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 public class Directivo extends Empleado {
     public static final String CATEGORIA_DEFAULT = "Sin Categoria";
 
     private String categoria;
 
-    private Empleado[] subordinados;
+    private Set<Empleado> subordinados;
 
     public Directivo(String nombre, Integer edad, Double sueldoBruto, String categoria) {
         super(nombre, edad, sueldoBruto);
         this.categoria = categoria;
-        this.subordinados = new Empleado[10];
+        this.subordinados = new TreeSet<Empleado>();
     }
 
     public Directivo(String nombre, Integer edad, Double sueldoBruto) {
@@ -29,13 +32,30 @@ public class Directivo extends Empleado {
         return categoria;
     }
 
-    public Empleado[] getSubordinados() {
+    public Set<Empleado> getSubordinados() {
         return subordinados;
     }
 
     @Override
     public void mostrar() {
-        System.out.printf("El directivo %s tiene %d años y su sueldo es de $ %,.2f y su categoria es %s %n",
+        System.out.printf("El directivo %s tiene %d años y su sueldo es de $ %,.2f y su categoria es %s",
                 getNombre(), getEdad(), getSueldoBruto(), categoria);
+
+        // System.out.print(" y sus subordinados son: ");
+        // var agregarComa = false;
+        // for (var empleado : subordinados) {
+        // if(agregarComa) {
+        // System.out.print(", ");
+        // }
+        // System.out.print(empleado.getNombre());
+        // agregarComa = true;
+        // }
+        // System.out.println();
+        System.out.println(" y sus subordinados son: " +
+                subordinados.stream()
+                        .filter(empleado -> empleado.getSueldoBruto() > SALARIO_MINIMO)
+                        .map(empleado -> empleado.getNombre())
+                        .reduce((a, b) -> a + ", " + b)
+                        .orElse("Sin subordinados"));
     }
 }
